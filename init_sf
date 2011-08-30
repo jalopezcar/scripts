@@ -8,12 +8,12 @@ case "$OS" in
 "Linux")
     echo "O.S. detected: Linux"    
     ;;
-"Mac")    
+"Darwin")    
     echo "O.S. detected: Mac"    
-    
     ;;    
 *)    
-    echo "O.S. detected: $OS Not supported yet"   
+    echo "O.S. detected: $OS Not supported yet"
+    exit;
     ;;     
 esac
 
@@ -37,7 +37,7 @@ else
 fi
 
 
-if [ ! -z `ls -A` ]; then 
+if [[ ! -z `ls -A` ]]; then 
     echo "Error: directory not empty"
     echo
     exit
