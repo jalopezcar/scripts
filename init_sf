@@ -1,20 +1,52 @@
 #!/bin/bash
+# Install and configure Symfony2
 
 echo
 
-if test -z "$1"
+OS=$(uname)
+case "$OS" in
+"Linux")
+    echo "O.S. detected: Linux"    
+    ;;
+"Mac")    
+    echo "O.S. detected: Mac"    
+    
+    ;;    
+*)    
+    echo "O.S. detected: $OS Not supported yet"   
+    ;;     
+esac
+
+
+APACHE_USER=$(ps axho user,comm|grep -E "httpd|apache"|uniq|grep -v "root"|awk 'END {print $1}')
+if test -z "$APACHE_USER"
 then
-  echo "Debes poner el nombre del proyecto (ej miproyecto.local)"
+    echo "Error: apache user not found "$APACHE_USER
+    exit
 else
-  echo "$1"
+    echo "Apache user: "$APACHE_USER
 fi
 
-#TODO check dir exist, contains data...
-mkdir $1
-cd $1
+WHOAMI=$(whoami)
+if test -z "$WHOAMI"
+then
+    echo "Error: whoami fails"
+    exit
+else
+    echo "Default user "$WHOAMI
+fi
 
+
+if [ ! -z `ls -A` ]; then 
+    echo "Error: directory not empty"
+    echo
+    exit
+fi
+
+echo "Directory: "$(pwd)
+set -o verbose
 git init .
-git remote add symfony git://github.com/symfony/symfony-standard.git
+git remote add symfony https://github.com/symfony/symfony-standard.git
 git fetch symfony
 git branch -r
 git tag
@@ -25,14 +57,15 @@ mkdir -p app/cache
 mkdir -p app/logs
 rm -rf app/cache/*
 rm -rf app/logs/*
-sudo chmod +a "_www allow delete,write,append,file_inherit,directory_inherit" app/cache app/logs
-sudo chmod +a "jalopez allow delete,write,append,file_inherit,directory_inherit" app/cache app/logs
+sudo chmod +a "$APACHE_USER allow delete,write,append,file_inherit,directory_inherit" app/cache app/logs
+sudo chmod +a "$WHOAMI allow delete,write,append,file_inherit,directory_inherit" app/cache app/logs
 sudo chmod 777 app/config/parameters.ini
 
-echo '127.0.0.1      '$1 | sudo tee -a /etc/hosts
-cat /etc/hosts
-open http://"$1"/app_dev.php
-mate .
+echo 
+echo 'Future steps..'
+echo '- Add host to /etc/hosts'
+echo '- app/console doctrine:database:create'
+echo '- .gitignore'
 
-echo 'Siguientes Pasos'
-echo 'app/console doctrine:database:create'
+
+
