@@ -24,14 +24,15 @@ alias p='cd $OLDPWD'
 alias ls="ls -G"
 alias l="ls -lah"
 alias ll="ls -lah"
-alias loge="tail -n 5 -f /opt/local/apache2/logs/error_log"
-alias loga="tail -n 5 -f /opt/local/apache2/logs/access_log"
+alias loge="tail -n 5 -f /opt/local/apache2/logs/error_log | colorize"
+alias loga="tail -n 5 -f /opt/local/apache2/logs/access_log | colorize"
 alias php.ini="sudo subl /opt/local/etc/php5/php.ini"
 alias apache.conf="sudo subl /opt/local/apache2/conf/httpd.conf"
 alias hosts="sudo subl /etc/hosts"
 alias bash_profile="subl /Users/jalopezcar/.bash_profile"
 alias named='sudo subl /etc/named.conf && named-checkconf && sudo launchctl load -w /System/Library/LaunchDaemons/org.isc.named.plist'
 alias getcomposer="curl -s http://getcomposer.org/installer | php"
+alias grep="grep --color=always"
 
 # Symfony2
 alias sf_entities="app/console generate:doctrine:entities"
@@ -42,5 +43,6 @@ alias ap="app/console"
 # Clear the screen and list files
 alias cls="clear;ls"
 
+# http://www.commandlinefu.com/commands/view/3086/search-commandlinefu.com-from-the-command-line-using-the-api
 cmdfu(){ curl "http://www.commandlinefu.com/commands/matching/$@/$(echo -n $@ | openssl base64)/plaintext"; }
 
