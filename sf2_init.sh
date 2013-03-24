@@ -3,7 +3,7 @@
 
 echo
 
-VERSION=2.2.0
+FILE="Symfony_Standard_2.2.0.tgz"
 
 OS=$(uname)
 case "$OS" in
@@ -48,30 +48,23 @@ fi
 echo "Directory: "$(pwd)
 set -o verbose
 
-wget http://symfony.com/download?v=Symfony_Standard_Vendors_"$VERSION".tgz
-tar xvfz Symfony_Standard_Vendors_"$VERSION".tgz
+wget -O ${FILE} http://symfony.com/download?v=${FILE}
+tar xvfz ${FILE}
+shopt -s dotglob nullglob
 mv Symfony/* .
 rmdir Symfony
-rm Symfony_Standard_Vendors_"$VERSION".tgz
+rm ${FILE}
 mkdir -p app/cache
 mkdir -p app/logs
 rm -rf app/cache/*
 rm -rf app/logs/*
-sudo chmod +a "$APACHE_USER allow delete,write,append,file_inherit,directory_inherit" app/cache app/logs
-sudo chmod +a "$WHOAMI allow delete,write,append,file_inherit,directory_inherit" app/cache app/logs
-sudo chmod 777 app/config/parameters.ini
-
-cp ../scripts/gitignore .gitignore
+sf2_permisos.sh
+sudo chmod 777 app/config/parameters.yml
+wget --no-check-certificate https://raw.github.com/phpjal/scripts/master/gitignore
 git init .
+git add .
 git commit -m "initial commit"
-
-bin/vendors install
-
-echo 
-echo 'Future steps..'
-echo '- Add host to /etc/hosts'
-echo '- app/console doctrine:database:create'
-echo '- .gitignore'
+composer.phar install
 
 
 
