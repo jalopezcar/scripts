@@ -3,6 +3,8 @@
 
 echo
 
+VERSION=2.2.0
+
 OS=$(uname)
 case "$OS" in
 "Linux")
@@ -45,14 +47,12 @@ fi
 
 echo "Directory: "$(pwd)
 set -o verbose
-git init .
-git remote add symfony https://github.com/symfony/symfony-standard.git
-git fetch symfony
-git branch -r
-git tag
-git checkout master
-git merge v2.0.1
-bin/vendors install
+
+wget http://symfony.com/download?v=Symfony_Standard_Vendors_"$VERSION".tgz
+tar xvfz Symfony_Standard_Vendors_"$VERSION".tgz
+mv Symfony/* .
+rmdir Symfony
+rm Symfony_Standard_Vendors_"$VERSION".tgz
 mkdir -p app/cache
 mkdir -p app/logs
 rm -rf app/cache/*
@@ -60,6 +60,12 @@ rm -rf app/logs/*
 sudo chmod +a "$APACHE_USER allow delete,write,append,file_inherit,directory_inherit" app/cache app/logs
 sudo chmod +a "$WHOAMI allow delete,write,append,file_inherit,directory_inherit" app/cache app/logs
 sudo chmod 777 app/config/parameters.ini
+
+cp ../scripts/gitignore .gitignore
+git init .
+git commit -m "initial commit"
+
+bin/vendors install
 
 echo 
 echo 'Future steps..'
