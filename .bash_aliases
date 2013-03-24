@@ -31,6 +31,7 @@ alias hosts="sudo subl /etc/hosts"
 alias bash_profile="subl /Users/jalopezcar/.bash_profile"
 alias named='sudo subl /etc/named.conf && named-checkconf && sudo launchctl load -w /System/Library/LaunchDaemons/org.isc.named.plist'
 alias getcomposer="curl -s http://getcomposer.org/installer | php"
+alias puertos="netstat -plnt"
 
 # Symfony2
 alias sf_entities="app/console generate:doctrine:entities"

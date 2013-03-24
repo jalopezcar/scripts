@@ -1,0 +1,15 @@
+# change to the previous working directory
+cd -
+
+# mtr, better than traceroute and ping combined
+mtr google.combined
+
+# Rapidly invoke an editor to write a long, complex, or tricky command
+ctrl-x e
+
+# Empty a file
+> file.txt
+
+# Place the argument of the most recent command on the shell
+ESC + .
+
