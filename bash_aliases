@@ -23,6 +23,7 @@ alias mysql="/opt/local/bin/mysql5"
 alias p='cd $OLDPWD'
 alias ls="ls -G"
 alias l="ls -lah"
+alias ll="ls -lah"
 alias loge="tail -n 5 -f /opt/local/apache2/logs/error_log"
 alias loga="tail -n 5 -f /opt/local/apache2/logs/access_log"
 alias php.ini="sudo subl /opt/local/etc/php5/php.ini"
@@ -40,4 +41,6 @@ alias ap="app/console"
 
 # Clear the screen and list files
 alias cls="clear;ls"
+
+cmdfu(){ curl "http://www.commandlinefu.com/commands/matching/$@/$(echo -n $@ | openssl base64)/plaintext"; }
 
