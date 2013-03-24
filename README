@@ -1,0 +1,28 @@
+# change to the previous working directory
+cd -
+
+# mtr, better than traceroute and ping combined
+mtr google.combined
+
+# Rapidly invoke an editor to write a long, complex, or tricky command
+ctrl-x e
+
+# Empty a file
+> file.txt
+
+# Place the argument of the most recent command on the shell
+ESC + .
+
+# Quick access to the ascii table.
+man ascii
+
+# Mount a temporary ram partition 
+mount -t tmpfs tmpfs /mnt -o size=1024m
+
+# Mount folder/filesystem through SSH
+# Install SSHFS from http://fuse.sourceforge.net/sshfs.html
+sshfs name@server:/path/to/folder /path/to/mount/point
+
+# Record a screencast and convert it to an mpeg
+# Grab X11 input and create an MPEG at 25 fps with the resolution 800x600
+ffmpeg -f x11grab -s wxga -r 25 -i :0.0 -sameq /tmp/out.mpg
