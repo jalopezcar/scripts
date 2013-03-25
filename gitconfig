@@ -1,3 +1,9 @@
+[http]
+	#proxy = http://localhost:5865
+[user]
+	name = phpjal
+	email = phpjal@gmail.com
+	
 [color]
   ui = auto
 [color "branch"]
@@ -15,18 +21,33 @@
   untracked = cyan
   
 [alias]
-  st = status
+  st = status -sb
   ci = commit
   br = branch
   co = checkout
   df = diff
   dc = diff --cached
+  ds = diff --staged
   lg = log -p
   lol = log --graph --decorate --pretty=oneline --abbrev-commit
   lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
   ls = ls-files
 
+ #did you forget to include a file with your last commit, or maybe you had one tweak you needed to make? Amend the staged changes to your last commit.
+
+  amend = commit --amend -C HEAD
+  
+  #undo: sometimes, amending your last commit isn't enough and you'll need to undo it instead. This alias will step back one commit and leave the changes from that commit staged. Now you can make additional changes, or recommit with a new message
+  
+  undo = reset --soft HEAD^
+
+  ls = log --pretty=format:"%C(yellow)%h %C(blue)%ad%C(red)%d %C(reset)%s%C(green) [%cn]" --decorate --date=short
+  standup = log --since '1 day ago' --oneline --author jalopez
+  graph = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
+
   # Show files ignored by git:
   ign = ls-files -o -i --exclude-standard
-  
+  	
+[core]
+	gitproxy = gitproxy
 
