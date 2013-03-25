@@ -21,21 +21,18 @@ alias mysql="/opt/local/bin/mysql5"
 
 # Commons
 alias p='cd $OLDPWD'
-alias ls="ls -G"
 alias l="ls -lah"
 alias ll="ls -lah"
 alias cls="clear;ls"
 alias grep="grep --color=always"
 
-# Logs
-alias loge="tail -n 5 -f /opt/local/apache2/logs/error_log | colorize"
-alias loga="tail -n 5 -f /opt/local/apache2/logs/access_log | colorize"
 alias apache.conf="sudo subl /opt/local/apache2/conf/httpd.conf"
 alias hosts="sudo subl /etc/hosts"
 alias bash_profile="subl /Users/jalopezcar/.bash_profile"
 alias named='sudo subl /etc/named.conf && named-checkconf && sudo launchctl load -w /System/Library/LaunchDaemons/org.isc.named.plist'
 
 # PHP & Symfony2
+alias c="app/console"
 alias php.ini="sudo subl /opt/local/etc/php5/php.ini"
 alias getcomposer="curl -s http://getcomposer.org/installer | php"
 alias sf_entities="app/console generate:doctrine:entities"
