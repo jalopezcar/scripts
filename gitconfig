@@ -5,6 +5,7 @@
 
 [color]
   ui = auto
+  
 [color "branch"]
   current = yellow reverse
   local = yellow
@@ -29,23 +30,59 @@
   df = diff
   dc = diff --cached
   ds = diff --staged
+  cp = cherry-pick
   lg = log -p
-  lol = log --graph --decorate --pretty=oneline --abbrev-commit
+  lol = log -lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short -graph --decorate --pretty=oneline --abbrev-commit
   lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
-  ls = ls-files
+  ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+  lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
+  lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+  ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
 
- #did you forget to include a file with your last commit, or maybe you had one tweak you needed to make? Amend the staged changes to your last commit.
+  # ficheros modificados en el ultimo commit
+  dl = "!git ll -1"
 
+  # diff del ultimo commit
+  dlc = diff --cached HEAD^
+
+  # buscar un fichero. Ej: git f filename
+  f = "!git ls-files | grep -i"
+
+  # buscar dentro de los ficheros una cadena. Ej. git grep cadena
+  grep = grep -Ii
+
+  # listar todos los alias de git
+  la = "!git config -l | grep alias | cut -c 7-"
+
+  # renombrar branch XXXX a done-XXXX. Ej, git done branchname
+  done = "!f() { git branch | grep "$1" | cut -c 3- | grep -v done | xargs -I{} git branch -m {} done-{}; }; f"
+
+  # did you forget to include a file with your last commit, or maybe you had 
+  # one tweak you needed to make? Amend the staged changes to your last commit.
   amend = commit --amend -C HEAD
-  
-  #undo: sometimes, amending your last commit isn't enough and you'll need to undo it instead. This alias will step back one commit and leave the changes from that commit staged. Now you can make additional changes, or recommit with a new message
-  
+ 
+  # undo: sometimes, amending your last commit isn't enough and you'll need to undo it instead. 
+  # This alias will step back one commit and leave the changes from that commit staged.
+  # Now you can make additional changes, or recommit with a new message
   undo = reset --soft HEAD^
-
-  ls = log --pretty=format:"%C(yellow)%h %C(blue)%ad%C(red)%d %C(reset)%s%C(green) [%cn]" --decorate --date=short
+ 
   standup = log --since '1 day ago' --oneline --author jalopez
-  graph = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
 
   # Show files ignored by git:
   ign = ls-files -o -i --exclude-standard
-  	
+  
+  # reset commands
+  r = reset
+  r1 = reset HEAD^
+  r2 = reset HEAD^^
+  rh = reset --hard
+  rh1 = reset HEAD^ --hard
+  rh2 = reset HEAD^^ --hard
+
+  # git subversion
+  svnr = svn rebase
+  svnd = svn dcommit
+  svnl = svn log --oneline --show-commit
+
+
