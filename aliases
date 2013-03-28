@@ -1,14 +1,61 @@
-alias puertos="netstat -plnt"
-alias loga='tail /var/log/apache2/other_vhosts_access.log -f | ccze -A';
-alias loge='tail /var/log/apache2/error.log -f | ccze -A';
+#
+# Enable .aliases in bash_profile
+# 
+# if [ -f ~/scripts/aliases ]; then
+# . ~/scripts/aliases
+# fi
+#
+
+# Commons
+alias p='cd $OLDPWD'
+alias l="ls -lah"
+alias ll="ls -lah"
+alias cls="clear;ls"
+alias grep="grep --color=always"
+
+# PHP & Symfony2
+alias sf="php app/console"
+alias sfhelp="php app/console help"
+alias sflist="php app/console list"
+alias sfassets-install="php app/console assets:install"
+alias sfcc="php app/console cache:clear"
+alias sfcache-warmup="php app/console cache:warmup"
+alias sfconfig-dump-reference="php app/console config:dump-reference"
+alias sfcontainer-debug="php app/console container:debug"
+alias sfrouter-dump-apache="php app/console router:dump-apache"
+alias sfrouter-debug="php app/console router:debug"
+alias sfrouter-match="php app/console router:match"
+alias sfserver-run="php app/console server:run"
+alias sftranslation-update="php app/console translation:update"
+alias sfinit-acl="php app/console init:acl"
+alias sftwig-lint="php app/console twig:lint"
+alias sfswiftmailer-spool-send="php app/console swiftmailer:spool:send"
+alias sfassetic-dump="php app/console assetic:dump"
+alias sfdql="php app/console doctrine:query:dql"
+alias sfupdate="app/console doctrine:schema:update"
+alias sfentities="app/console generate:doctrine:entities"
+
+alias php.ini="sudo subl /opt/local/etc/php5/php.ini"
+alias getcomposer="curl -s http://getcomposer.org/installer | php"
 
 
-#  Customize BASH PS1 prompt to show current GIT repository and branch.
-#  by Mike Stewart - http://MediaDoneRight.com
+# Subversion
+alias svndiff="svn diff --diff-cmd=\"colordiff\""
+alias svnst="svn status --ignore-externals"
+# Display a list of committers sorted by the frequency of commits
+alias svncommiters='svn log -q|grep "|"|awk "{print \$3}"|sort|uniq -c|sort -nr'
 
-#  SETUP CONSTANTS
-#  Bunch-o-predefined colors.  Makes reading code easier than escape sequences.
-#  I don't remember where I found this.  o_O
+# Git
+#git diff -U10|dwdiff --diff-input -c|less -R
+#git remove files which have been deleted
+#git rm $(git ls-files --deleted)
+
+# http://www.commandlinefu.com/commands/view/3086/search-commandlinefu.com-from-the-command-line-using-the-api
+cmdfu(){ curl "http://www.commandlinefu.com/commands/matching/$@/$(echo -n $@ | openssl base64)/plaintext"; }
+
+# 
+# COLORS
+#
 
 # Reset
 Color_Off="\[\033[0m\]"       # Text Reset
@@ -92,24 +139,15 @@ NewLine="\n"
 Jobs="\j"
 User="\u"
 
-# This PS1 snippet was adopted from code for MAC/BSD I saw from: http://allancraig.net/index.php?option=com_content&view=article&id=108:ps1-export-command-for-git&catid=45:general&Itemid=96
-# I tweaked it to work on UBUNTU 11.04 & 11.10 plus made it mo' better
 
-#export PS1=$IBlack$Time12h$Color_Off'$(git branch &>/dev/null;\
-export PS1=$IBlack$Time12a$Green$User$Color_Off'$(git branch &>/dev/null;\
+# Load aliases mac/linux
+OS='uname -s'
+if [[ "$OS" == 'Linux' ]]; then
+	. ~/scripts/aliases_linux
+else 
+	. ~/scripts/aliases_mac
+fi
 
-if [ $? -eq 0 ]; then \
-  echo "$(echo `git status` | grep "nothing to commit" > /dev/null 2>&1; \
-  if [ "$?" -eq "0" ]; then \
-    # @4 - Clean repository - nothing to commit
-    echo "'$Green'"$(__git_ps1 " (%s)"); \
-  else \
-    # @5 - Changes to working tree
-    echo "'$ICyan'"$(__git_ps1 " {%s}"); \
-  fi) '$BYellow$PathShort$Color_Off'\$ "; \
-else \
-  # @2 - Prompt when not in GIT repo
-  echo " '$Yellow$PathShort$Color_Off'\$ "; \
-fi)'
+
 
 
