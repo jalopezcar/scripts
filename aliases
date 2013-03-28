@@ -141,8 +141,8 @@ User="\u"
 
 
 # Load aliases mac/linux
-OS='uname -s'
-if [[ "$OS" == 'Linux' ]]; then
+OS=`uname -s`
+if [[ "$OS" == "Linux" ]]; then
 	. ~/scripts/aliases_linux
 else 
 	. ~/scripts/aliases_mac
