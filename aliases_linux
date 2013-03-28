@@ -3,14 +3,17 @@ alias loga='tail /var/log/apache2/other_vhosts_access.log -f | ccze -A';
 alias loge='tail /var/log/apache2/error.log -f | ccze -A';
 
 # Services
-alias service-apache='sudo apachectl restart'
-alias service-memcached='/usr/local/bin/memcached -d'
-alias service-mysql='mysql.server restart'
+alias service-apache='sudo service apache2 restart'
+alias service-memcached='sudo service memcached restart'
+alias service-mysql='sudo service mysql restart'
 alias service-rabbitmq='rabbitmq-server'
-alias service-mongodb='mongod'
-alias service-mail='sudo postfix start'
-alias service-redis='redis-server /usr/local/etc/redis.conf'
+alias service-mongodb='sudo service mongodb restart'
+alias service-mail=''
+alias service-redis='sudo service redis-server restart'
 
+# Conf files
+alias apache.conf="sudo subl /etc/apache2/apache2.conf"
+alias bash_profile="subl ~/.bashrc"
 
 #  Customize BASH PS1 prompt to show current GIT repository and branch.
 #export PS1=$IBlack$Time12h$Color_Off'$(git branch &>/dev/null;\

@@ -35,9 +35,10 @@ alias sfdql="php app/console doctrine:query:dql"
 alias sfupdate="app/console doctrine:schema:update"
 alias sfentities="app/console generate:doctrine:entities"
 
-alias php.ini="sudo subl /opt/local/etc/php5/php.ini"
 alias getcomposer="curl -s http://getcomposer.org/installer | php"
 
+# Conf files
+alias hosts="sudo subl /etc/hosts"
 
 # Subversion
 alias svndiff="svn diff --diff-cmd=\"colordiff\""

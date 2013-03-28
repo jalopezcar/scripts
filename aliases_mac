@@ -25,9 +25,10 @@ alias service-redis='redis-server /usr/local/etc/redis.conf'
 # alias mysql="/opt/local/bin/mysql5"
 # alias named='sudo subl /etc/named.conf && named-checkconf && sudo launchctl load -w /System/Library/LaunchDaemons/org.isc.named.plist'
 
+# Conf files
 alias apache.conf="sudo subl /opt/local/apache2/conf/httpd.conf"
-alias hosts="sudo subl /etc/hosts"
-alias bash_profile="subl /Users/jalopezcar/.bash_profile"
+alias php.ini="sudo subl /opt/local/etc/php5/php.ini"
+alias bash_profile="subl ~/.bash_profile"
 
 #  Customize BASH PS1 prompt to show current GIT repository and branch.
 export PS1='$(git branch &>/dev/null; if [ $? -eq 0 ]; then \
