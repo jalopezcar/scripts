@@ -3,6 +3,9 @@
 #    path = scripts/gitconfig	
 #
 
+[diff]
+  external = diff_git_meld.py
+  
 [color]
   ui = auto
   
