@@ -1,0 +1,21 @@
+#!/bin/bash
+
+echo "STOP..."
+sudo apachectl stop
+launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.rabbitmq.plist
+launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.redis.plist
+launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist
+launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.memcached.plist    
+sudo postfix stop
+
+sleep 1
+
+echo "START..."
+sudo apachectl start
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.rabbitmq.plist
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.redis.plist
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.memcached.plist
+sudo postfix start

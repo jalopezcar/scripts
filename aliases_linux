@@ -1,4 +1,4 @@
-alias puertos="netstat -plnt"
+alias ports="netstat -plnt"
 alias loga='tail /var/log/apache2/other_vhosts_access.log -f | ccze -A';
 alias loge='tail /var/log/apache2/error.log -f | ccze -A';
 
@@ -15,22 +15,6 @@ alias service-redis='sudo service redis-server restart'
 alias apache.conf="sudo subl /etc/apache2/apache2.conf"
 alias bash_profile="subl ~/.bashrc"
 
-#  Customize BASH PS1 prompt to show current GIT repository and branch.
-#export PS1=$IBlack$Time12h$Color_Off'$(git branch &>/dev/null;\
-export PS1=$IBlack$Time12a$Green$User$Color_Off'$(git branch &>/dev/null;\
 
-if [ $? -eq 0 ]; then \
-  echo "$(echo `git status` | grep "nothing to commit" > /dev/null 2>&1; \
-  if [ "$?" -eq "0" ]; then \
-    # @4 - Clean repository - nothing to commit
-    echo "'$Green'"$(__git_ps1 " (%s)"); \
-  else \
-    # @5 - Changes to working tree
-    echo "'$ICyan'"$(__git_ps1 " {%s}"); \
-  fi) '$BYellow$PathShort$Color_Off'\$ "; \
-else \
-  # @2 - Prompt when not in GIT repo
-  echo " '$Yellow$PathShort$Color_Off'\$ "; \
-fi)'
 
 

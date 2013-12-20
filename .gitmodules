@@ -1,0 +1,3 @@
+[submodule "symfony2-autocomplete"]
+	path = symfony2-autocomplete
+	url = git@github.com:KnpLabs/symfony2-autocomplete.git
