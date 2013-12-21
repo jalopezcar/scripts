@@ -30,7 +30,7 @@ if [[ "$OS" == "Linux" ]]; then
 	sudo setfacl -R -m u:$APACHE:rwx -m u:$WHOAMI:rwx app/cache app/logs
     sudo setfacl -dR -m u:$APACHE:rwx -m u:$WHOAMI:rwx app/cache app/logs
 else 
-	sudo chmod +a "$APACHE_USER allow delete,write,append,file_inherit,directory_inherit" app/cache app/logs
-	sudo chmod +a "$WHOAMI allow delete,write,append,file_inherit,directory_inherit" app/cache app/logs
+	sudo /bin/chmod +a "$APACHE_USER allow delete,write,append,file_inherit,directory_inherit" app/cache app/logs
+	sudo /bin/chmod +a "$WHOAMI allow delete,write,append,file_inherit,directory_inherit" app/cache app/logs
 fi
 

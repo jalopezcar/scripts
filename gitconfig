@@ -5,7 +5,7 @@
 
 [diff]
   #external = diff_git_meld.py
-  external = git-diff-cmd.sh
+  #external = git-diff-cmd.sh
   
 [color]
   ui = auto
