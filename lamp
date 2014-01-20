@@ -3,7 +3,8 @@
 echo "STOP..."
 sudo launchctl unload /Library/LaunchDaemons/homebrew.mxcl.dnsmasq.plist
 sudo apachectl stop
-launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+#launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+sudo /usr/local/mysql/support-files/mysql.server stop
 launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.rabbitmq.plist
 launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.redis.plist
 launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist
@@ -15,7 +16,8 @@ sleep 1
 echo "START..."
 sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.dnsmasq.plist
 sudo apachectl start
-launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+#launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+sudo /usr/local/mysql/support-files/mysql.server start
 launchctl load ~/Library/LaunchAgents/homebrew.mxcl.rabbitmq.plist
 launchctl load ~/Library/LaunchAgents/homebrew.mxcl.redis.plist
 launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist
