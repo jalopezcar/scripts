@@ -27,6 +27,13 @@
   untracked = cyan
   
 [alias]
+  wl = worktree list
+  wa = "!f() { git worktree add -b "$1" ../working_"$1" origin/"$1"; }; f" 
+  waf = "!f() { git worktree add -b "juan/$1" "../working_$1" origin/"$2"; }; f" 
+  wp = worktree prune
+  
+  pullr = "!f() { git fetch --prune; git rebase --autostash; }; f"
+
   st = status -sb
   ci = commit
   br = branch
@@ -74,7 +81,7 @@
   # Now you can make additional changes, or recommit with a new message
   undo = reset --soft HEAD^
  
-  standup = log --since '1 day ago' --oneline --author jalopez
+  standup = log --since '1 day ago' --oneline --author jlopezcarreno
 
   # Show files ignored by git:
   ign = ls-files -o -i --exclude-standard
