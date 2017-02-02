@@ -1,8 +1,12 @@
+alias xcode="open -a Xcode *.xcworkspace"
+alias xcodebeta="open -a '/Users/jlopezcarreno/Applications/Xcode.app/Contents/MacOS/Xcode' *.xcworkspace"
+alias sourcetree="open -a SourceTree ."
+
+
 #alias ls="ls -G"
 alias loge="tail -n 5 -f /private/var/log/apache2/error_log | ccze -A"
 alias loga="tail -n 5 -f /private/var/log/apache2/access_log | ccze -A"
 alias console="open -a Console"
-
 
 # OLD
 # Customize BASH PS1 prompt to show current GIT repository and branch.
