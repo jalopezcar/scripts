@@ -1,5 +1,7 @@
-alias xcode="open -a Xcode *.xcworkspace"
-alias xcodebeta="open -a '/Users/jlopezcarreno/Applications/Xcode.app/Contents/MacOS/Xcode' *.xcworkspace"
+#
+alias xcode="open -a /Applications/Xcode.app/Contents/MacOS/Xcode *.xcworkspace"
+alias xcodebeta9="open -a /Users/jlopezcarreno/Applications/Xcode.app/Contents/MacOS/Xcode *.xcworkspace"
+
 alias sourcetree="open -a SourceTree ."
 
 

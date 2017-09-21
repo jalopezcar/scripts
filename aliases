@@ -10,8 +10,10 @@
 alias myip='ipconfig getifaddr en0'
 alias p='cd $OLDPWD'
 alias ls="ls --color=auto"
-alias l="ls -lah --color=auto"
-alias ll="ls -lah --color=auto"
+#alias l="ls -lah --color=auto"
+alias l="exa -l"
+#alias ll="ls -lah --color=auto"
+alias ll="exa -bghHliS"
 alias cls="clear;ls"
 alias grep="grep --color=always"
 alias gitalias="git config --list | grep alias"
@@ -144,8 +146,8 @@ Jobs="\j"
 User="\u"
 
 
-source ./Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash
-source ./Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
+source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash
+source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
 
 #shell prompt example
 #export PS1=$IBlack$Green$User$Color_Off' $(__git_ps1 "(%s)")\$ '
