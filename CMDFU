@@ -1,0 +1,159 @@
+# [commandlinefu.com](commandlinefu.com)
+
+Find in cmdfu
+
+```
+$ cmdfu [search]
+```
+
+mtr, better than traceroute and ping combined
+
+```
+mtr google.combined
+```
+
+Rapidly invoke an editor to write a long, complex, or tricky command
+
+```
+ctrl-x e
+```
+
+Empty a file
+
+```
+> file.txt
+```
+
+Place the argument of the most recent command on the shell
+
+```
+ESC + .
+```
+
+Quick access to the ascii table.
+
+```
+man ascii
+```
+
+Mount a temporary ram partition 
+
+```
+mount -t tmpfs tmpfs /mnt -o size=1024m
+```
+
+Mount folder/filesystem through SSH
+Install SSHFS from http://fuse.sourceforge.net/sshfs.html
+
+```
+sshfs name@server:/path/to/folder /path/to/mount/point
+```
+
+Record a screencast and convert it to an mpeg
+Grab X11 input and create an MPEG at 25 fps with the resolution 800x600
+
+```
+ffmpeg -f x11grab -s wxga -r 25 -i :0.0 -sameq /tmp/out.mpg
+```
+
+Download an entire website
+
+```
+wget --random-wait -r -p -e robots=off -U mozilla http://www.example.com
+```
+
+#SH connection through host in the middle
+
+```
+ssh -t reachable_host ssh unreachable_host
+```
+
+Close shell keeping all subprocess running
+
+```
+disown -a && exit
+```
+
+List of commands you use most often
+
+```
+history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head
+```
+
+Show apps that use internet connection at the moment.
+
+```
+lsof -P -i -n
+ss -p
+```
+
+python smtp server
+This command will start a simple SMTP server listening on port 1025 of localhost. This server simply prints to standard 
+
+```
+output all email headers and the email body
+python -m smtpd -n -c DebuggingServer localhost:1025
+```
+
+save command output to image
+
+```
+ls -lah  | convert label:@- ip.png
+```
+
+Extract tarball from internet without local saving
+
+```
+wget -qO - "http://www.tarball.com/tarball.gz" | tar zxvf -
+```
+
+Kills a process that is locking a file.
+
+```
+fuser -k filename
+```
+
+Get the 10 biggest files/folders for the current direcotry
+
+```
+du -s * | sort -n | tail
+```
+
+Monitor the queries being run by MySQL
+
+```
+watch -n 1 mysqladmin --user=<user> --password=<password> processlist
+```
+
+Discover what package a file belongs to
+
+```
+dpkg -S /usr/bin/ls
+```
+
+
+Backup all MySQL Databases to individual files
+
+```
+for db in $(mysql -e 'show databases' -s --skip-column-names); do mysqldump $db | gzip > "/backups/mysqldump-$(hostname)-$db-$(date +%Y-%m-%d-%H.%M.%S).gz"; done
+```
+
+Simulate slow network connection locally
+
+```
+sudo tc qdisc add dev lo root netem delay 500ms
+```
+
+Limit the rate of traffic to a particular address with tc.
+
+```
+tc qdisc add dev <dev> root handle 1: cbq avpkt 1000 bandwidth 100mbit;tc class add dev <dev> parent 1: classid 1:1 cbq rate 300kbit allot 1500 prio 5 bounded isolated;tc filter add dev <dev> parent 1: protocol ip prio 16 u32 match ip dst <ip> flowid 1:1
+```
+
+backup all your commandlinefu.com favourites to a plaintext file
+
+```
+clfavs(){ URL="http://www.commandlinefu.com";wget -O - --save-cookies c --post-data "username=$1&password=$2&submit=Let+me+in" $URL/users/signin;for i in `seq 0 25 $3`;do wget -O - --load-cookies c $URL/commands/favourites/plaintext/$i >>$4;done;rm -f c;}
+```
+
+
