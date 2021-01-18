@@ -27,50 +27,29 @@
   untracked = cyan
   
 [alias]
+  
+  # WORKTREES
   wl = worktree list
   wa = "!f() { git worktree add -b "$1" ../working_"$1" origin/"$1"; }; f" 
   waf = "!f() { git worktree add -b "juan/$1" "../working_$1" origin/"$2"; }; f" 
   wp = worktree prune
   
-  pullr = "!f() { git fetch --prune; git rebase --autostash; }; f"
 
+  # COMMONS
+  alias = !git config --list | grep alias
   st = status -sb
   ci = commit
   br = branch
   co = checkout
   df = diff
+  dfn = diff --stat=160,120
   dc = diff --cached
+  dlc = diff --cached HEAD^
   ds = diff --staged
   cp = cherry-pick
-  lg = log -p
-  lol = log -lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short -graph --decorate --pretty=oneline --abbrev-commit
-  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
-  ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
-  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
-  lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
-  lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
-  ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
 
-  # remove submodule git rms path/to/submodule
-  rms = "!f(){ git rm --cached \"$1\";rm -r \"$1\";git config -f .gitmodules --remove-section \"submodule.$1\";git config -f .git/config --remove-section \"submodule.$1\";git add .gitmodules; }; f"
-
-  # ficheros modificados en el ultimo commit
-  dl = "!git ll -1"
-
-  # diff del ultimo commit
-  dlc = diff --cached HEAD^
-
-  # buscar un fichero. Ej: git f filename
-  f = "!git ls-files | grep -i"
-
-  # buscar dentro de los ficheros una cadena. Ej. git grep cadena
-  grep = grep -Ii
-
-  # listar todos los alias de git
-  la = "!git config -l | grep alias | cut -c 7-"
-
-  # renombrar branch XXXX a done-XXXX. Ej, git done branchname
-  done = "!f() { git branch | grep "$1" | cut -c 3- | grep -v done | xargs -I{} git branch -m {} done-{}; }; f"
+  # pull branch
+  pullr = "!f() { git fetch --prune; git rebase --autostash; }; f"
 
   # did you forget to include a file with your last commit, or maybe you had 
   # one tweak you needed to make? Amend the staged changes to your last commit.
@@ -80,6 +59,34 @@
   # This alias will step back one commit and leave the changes from that commit staged.
   # Now you can make additional changes, or recommit with a new message
   undo = reset --soft HEAD^
+
+  # LOGS
+
+  lg = log -p
+  lol = log -lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short -graph --decorate --pretty=oneline --abbrev-commit
+  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+  lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
+  lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+  ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+  head = !git ld -1
+  b = "!. ~/scripts/.githelpers && pretty_git_branch"
+
+  # Remove submodule git rms path/to/submodule
+  rms = "!f(){ git rm --cached \"$1\";rm -r \"$1\";git config -f .gitmodules --remove-section \"submodule.$1\";git config -f .git/config --remove-section \"submodule.$1\";git add .gitmodules; }; f"
+
+  # Files updates in the last commit
+  dl = "!git ll -1"
+
+  # Find file. Ej: git f filename
+  f = "!git ls-files | grep -i"
+
+  # Find string . Ej. git grep FOO
+  grep = grep -Ii
+
+  # Rename branch XXXX to done-XXXX. Ej, git done branchname
+  done = "!f() { git branch | grep "$1" | cut -c 3- | grep -v done | xargs -I{} git branch -m {} done-{}; }; f"
  
   standup = log --since '1 day ago' --oneline --author jlopezcarreno
 
@@ -87,16 +94,14 @@
   ign = ls-files -o -i --exclude-standard
   
   # reset commands
-  r = reset
-  r1 = reset HEAD^
-  r2 = reset HEAD^^
-  rh = reset --hard
-  rh1 = reset HEAD^ --hard
-  rh2 = reset HEAD^^ --hard
+  # r = reset
+  # r1 = reset HEAD^
+  # r2 = reset HEAD^^
+  # rh = reset --hard
+  # rh1 = reset HEAD^ --hard
+  # rh2 = reset HEAD^^ --hard
 
   # git subversion
-  svnr = svn rebase
-  svnd = svn dcommit
-  svnl = svn log --oneline --show-commit
-
-
+  # svnr = svn rebase
+  # svnd = svn dcommit
+  # svnl = svn log --oneline --show-commit
