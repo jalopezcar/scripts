@@ -1,63 +1,36 @@
-#
-# Enable .aliases in bash_profile
-# 
-# if [ -f ~/scripts/aliases ]; then
-# . ~/scripts/aliases
-# fi
-#
 
-# Commons
+# Alias
+
+alias zshrc='code ~/.zshrc'
 alias myip='ipconfig getifaddr en0'
 alias p='cd $OLDPWD'
 alias ls="ls --color=auto"
-#alias l="ls -lah --color=auto"
 alias l="exa -l"
-#alias ll="ls -lah --color=auto"
 alias ll="exa -bghHliS"
 alias cls="clear;ls"
 alias grep="grep --color=always"
 alias gitalias="git config --list | grep alias"
 
-# PHP & Symfony2
-alias sf="php app/console"
-alias sfhelp="php app/console help"
-alias sflist="php app/console list"
-alias sfassets-install="php app/console assets:install"
-alias sfcc="php app/console cache:clear"
-alias sfcache-warmup="php app/console cache:warmup"
-alias sfconfig-dump-reference="php app/console config:dump-reference"
-alias sfcontainer-debug="php app/console container:debug"
-alias sfrouter-dump-apache="php app/console router:dump-apache"
-alias sfrouter-debug="php app/console router:debug"
-alias sfrouter-match="php app/console router:match"
-alias sfserver-run="php app/console server:run"
-alias sftranslation-update="php app/console translation:update"
-alias sfinit-acl="php app/console init:acl"
-alias sftwig-lint="php app/console twig:lint"
-alias sfswiftmailer-spool-send="php app/console swiftmailer:spool:send"
-alias sfassetic-dump="php app/console assetic:dump"
-alias sfdql="php app/console doctrine:query:dql"
-alias sfupdate="app/console doctrine:schema:update"
-alias sfentities="app/console generate:doctrine:entities"
+alias xcode="open -a /Users/jlopezcarreno/Applications/Xcode.app/Contents/MacOS/Xcode *.xcworkspace --args -ApplePersistenceIgnoreState YES"
+alias xcodebeta="open -a /Users/jlopezcarreno/Applications/Xcode.app/Contents/MacOS/Xcode *.xcworkspace --args -ApplePersistenceIgnoreState YES"
+alias xcodeclean="rm -frd ~/Library/Developer/Xcode/DerivedData/* && rm -frd ~/Library/Caches/com.apple.dt.Xcode/* && rm -frd /Users/jlopezcarreno/groupon/ios/DerivedData/*"
 
-alias getcomposer="curl -s http://getcomposer.org/installer | php"
+alias sourcetree="open -a SourceTree ."
+alias console="open -a Console"
 
-# Conf files
-alias hosts="sudo subl /etc/hosts"
 
-# Subversion
-alias svndiff="svn diff --diff-cmd=\"colordiff\""
-alias svnst="svn status --ignore-externals"
-# Display a list of committers sorted by the frequency of commits
-alias svncommiters='svn log -q|grep "|"|awk "{print \$3}"|sort|uniq -c|sort -nr'
+#func sourcetree() {
+#	open -a SourceTree $(git rev-parse --show-toplevel)
+#}
 
-# Git
-#alias gitdiff="git diff -U10|dwdiff --diff-input -c|less -R"
-#git remove files which have been deleted
-#gitrm="git rm $(git ls-files --deleted)"
+# Deprecated
+# alias ls="ls -G"
+# alias loge="tail -n 5 -f /private/var/log/apache2/error_log | ccze -A"
+# alias loga="tail -n 5 -f /private/var/log/apache2/access_log | ccze -A"
+# alias l="ls -lah --color=auto"
+# alias ll="ls -lah --color=auto"
 
-# http://www.commandlinefu.com/commands/view/3086/search-commandlinefu.com-from-the-command-line-using-the-api
-cmdfu(){ curl "http://www.commandlinefu.com/commands/matching/$@/$(echo -n $@ | openssl base64)/plaintext"; }
+
 
 # 
 # COLORS
@@ -146,33 +119,6 @@ Jobs="\j"
 User="\u"
 
 
-source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash
-source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
-
-#shell prompt example
-#export PS1=$IBlack$Green$User$Color_Off' $(__git_ps1 "(%s)")\$ '
-
-
-
-#  Customize BASH PS1 prompt to show current GIT repository and branch.
-#export PS1=$IBlack$Time12h$Color_Off'$(git branch &>/dev/null;\
-#export PS1=$IBlack$Green$User$Color_Off'$(git branch &>/dev/null;\
-
-#if [ $? -eq 0 ]; then \
-#  echo "$(echo `git status` | grep "nothing to commit" > /dev/null 2>&1; \
-#  if [ "$?" -eq "0" ]; then \
-    # @4 - Clean repository - nothing to commit
-#    echo "'$Green'"$(__git_ps1 " (%s)"); \
-#  else \
-    # @5 - Changes to working tree
-#    echo "'$ICyan'"$(__git_ps1 " {%s}"); \
-#  fi) '$BYellow$PathShort$Color_Off'\$ "; \
-#else \
-  # @2 - Prompt when not in GIT repo
-#  echo " '$Yellow$PathShort$Color_Off'\$ "; \
-#fi)'
-
-
 # Setting GIT prompt
 c_cyan=`tput setaf 6`
 c_red=`tput setaf 1`
@@ -204,27 +150,16 @@ parse_git_branch ()
     else
         return 0
     fi
-echo -e $gitver
+	 	echo -e $gitver
 }
 
 #It's important to escape colors with \[ to indicate the length is 0
 #export PS1=$IBlack$Green$User$Color_Off'$(git branch &>/dev/null;\
-PS1=$IBlack$Green$User$Color_Off' @\[${c_red}\]\W\[${c_sgr0}\]\[\[$(branch_color)\]$(parse_git_branch)\[${c_sgr0}\]$ '
+
+# HERE
+#PS1=$IBlack$Green$User$Color_Off' @\[${c_red}\]\W\[${c_sgr0}\]\[\[$(branch_color)\]$(parse_git_branch)\[${c_sgr0}\]$ '
 
 #PS1='\u@\[${c_red}\]\W\[${c_sgr0}\]\[\[$(branch_color)\]$(parse_git_branch)\[${c_sgr0}\]$ '
-
-
-
-
-
-# Load aliases mac/linux
-OS=`uname -s`
-if [[ "$OS" == "Linux" ]]; then
-	. ~/scripts/aliases_linux
-else 
-	. ~/scripts/aliases_mac
-fi
-
 
 
 
